@@ -1,0 +1,44 @@
+C:\Users\celin\AppData\Local\Programs\stack\x86_64-windows\ghc-9.2.7\lib\x86_64-windows-ghc-9.2.7\rts-1.0.2\include\ghcversion.h:
+  hash: 29d6607e92f065af06096e2cf6677b816f36cb00b9c9cf137b6a887fe0a21ffd
+D:\S6\MozartGame\PortMidi-master\.stack-work\dist\8a54c84f\build\autogen\cabal_macros.h:
+  hash: 0775a5cc9b8f41f00930e01e2866b2ef475948366b86ad1b889bb1a06e23e770
+D:\S6\MozartGame\PortMidi-master\CHANGELOG.md:
+  hash: 0a6c21d6a99daefc5afe771e4bc1724fc034255efb02cf302ca70e65f90a0523
+D:\S6\MozartGame\PortMidi-master\PortMidi.cabal:
+  hash: 956144a58571f2839e895a1330b61a3898234dc45cb07c576bb55a8db03a6b91
+D:\S6\MozartGame\PortMidi-master\README.txt:
+  hash: c315886d025d0d4aa1a2e16ff8423db308c76806cb6466571aa3d2aa7c1aee9a
+D:\S6\MozartGame\PortMidi-master\Sound\PortMidi.hs:
+  hash: d5cc36bf11da6bfc8ab1ab8b2ac6b40762345d2c9ae8f499e9b62e85755ce93e
+D:\S6\MozartGame\PortMidi-master\Sound\PortMidi\DeviceInfo.hsc:
+  hash: a0fc6d368fcbcb7a886ec19af95e00fa33614056f40bf4b00c5d9e57e17e7739
+D:\S6\MozartGame\PortMidi-master\portmidi\pm_common\pminternal.h:
+  hash: cf1fd525ffa18d3385bc8495b4a4de88bb58d487f4a2357100236b22602a30e6
+D:\S6\MozartGame\PortMidi-master\portmidi\pm_common\pmutil.c:
+  hash: d58a36ae84a9e23b9304e9edac072b0b9d8cccd4220667b3559fc9faba833aad
+D:\S6\MozartGame\PortMidi-master\portmidi\pm_common\pmutil.h:
+  hash: eaa6789126b69d22256c9b364fad96a52fe337cc44636ec0c82fad96e7398975
+D:\S6\MozartGame\PortMidi-master\portmidi\pm_common\portmidi.c:
+  hash: d2a2329ac2591eeb0eb61f668fcd48735bc5d1b238a9dbef27de0a603bf252b2
+D:\S6\MozartGame\PortMidi-master\portmidi\pm_common\portmidi.h:
+  hash: 7e94cab72755c5e12ed67579904894ced9ad2fa2756b4ca73ce0980ac7a81a97
+D:\S6\MozartGame\PortMidi-master\portmidi\pm_linux\pmlinux.h:
+  hash: 2d09203db12b3521d4e4920185c8dc8147a78df491f261466fb614b47d4bef9a
+D:\S6\MozartGame\PortMidi-master\portmidi\pm_linux\pmlinuxalsa.h:
+  hash: a42f82db6c2c60d5155b765686b5d167fb3fd64864f19cd4f94da464156b39e1
+D:\S6\MozartGame\PortMidi-master\portmidi\pm_mac\pmmac.h:
+  hash: 90352ba904b5d23eb7236bb90f3bee6c78e973a79e8f1d0979149e7b81f65329
+D:\S6\MozartGame\PortMidi-master\portmidi\pm_mac\pmmacosxcm.h:
+  hash: b292e24dd69a91f5624328193e190f3141497c083e2f603f17bc45d3e1bccd75
+D:\S6\MozartGame\PortMidi-master\portmidi\pm_win\pmwin.c:
+  hash: 6562cb7035dbb87ba990cf3f49376804af3aa3e118b1c01f0c3f2089d13b65ab
+D:\S6\MozartGame\PortMidi-master\portmidi\pm_win\pmwinmm.c:
+  hash: 93983b8536a195b7a0fee70bfd665dd4e3c0c0347149736143e8fc905d2b7237
+D:\S6\MozartGame\PortMidi-master\portmidi\pm_win\pmwinmm.h:
+  hash: 2dd8674cae0fed6349b373ba850a1415192ced8bf9618c739dd30dcfc1036c69
+D:\S6\MozartGame\PortMidi-master\portmidi\porttime\porttime.c:
+  hash: d06812fbf6a459cc6c7fc7f2e166b5916a1607c831803855784142c75bf77b0d
+D:\S6\MozartGame\PortMidi-master\portmidi\porttime\porttime.h:
+  hash: c5500487275e68d084e0701387739da72235af9fa63b65bf1f4559fa3e88725f
+D:\S6\MozartGame\PortMidi-master\portmidi\porttime\ptwinmm.c:
+  hash: d4ad07a3665e924802564d8d91121a36398599f9648ab47633ec4387e0a74f15
