@@ -4,39 +4,34 @@ import Control.Concurrent
 import Sound.PortMidi
 import Midi
 import Text.Read (readMaybe)
+import State
+import Control.Monad.State
+import Io
 
-midiDevicePrint :: Int -> IO ()
-midiDevicePrint 0 = getDeviceInfo 0 >>= print
-midiDevicePrint n = do
-  getDeviceInfo n >>= print
-  midiDevicePrint (n - 1)
+
 
 main :: IO ()
 main = do
-  putStrLn "Le Jeu de Mozart "
+  putStrLn "\nLe Jeu de Mozart\n"
   initialize
-  n <- countDevices
-  midiDevicePrint (n - 1)
-  putStrLn "Entrez le numéro du périphérique de sortie souhaité :"
-  line <- getLine
-  let maybeDeviceId = readMaybe line :: Maybe Int
-  case maybeDeviceId of
-    Nothing -> putStrLn "Entrée invalide, veuillez saisir un nombre."
-    Just deviceId -> do
-      result <- openOutput deviceId 1
-      case result of
-        Left err -> return ()
-        Right stream -> do
-          sendMidiNote 60 1000 100 0 stream
-          threadDelay (2000 * 1000)
-          _ <- close stream
-          return ()
+
+  let state = GameState { midiDeviceId = 0,
+                          midiStream = undefined,
+                          instrumentId = 1,
+                          transpositionId = 0,
+                          miroirId = 0,
+                          facteurId = 1.0 }
+
+  (stream, newState) <- chooseMidi state
+
+  menu newState
+
   terminate
   return ()
 
-menu :: IO ()
-menu = do
-  putStrLn "Menu:"
+menu :: GameState -> IO ()
+menu s = do
+  putStrLn "\nVeuillez entrer le numéro d'une instruction:\n"
   putStrLn "1. Jouer un morceau"
   putStrLn "2. Changer d'instrument"
   putStrLn "3. Transposer"
@@ -47,17 +42,34 @@ menu = do
   line <- getLine
   case line of
     "1" -> do
-      -- à compléter
+      printState s
+      playMenuet s
+      putStrLn "Fin du Menuet\n"
+      menu s
     "2" -> do 
-      stream <- getOutputDevice
-      
-      menu stream
+      newS <- demandeInstrument s
+      printState newS
+      menu newS
     "3" -> do
+      newS <- demandeTransposition s
+      printState newS
+      menu newS
+    "4" -> do
+      newS <- demandeMiroir s  -- peut modifier miroir de sorte à le faire automatiquement en fonction de l'état actuel du miroir
+      printState newS
+      menu newS
+    "5" -> do
+      newS <- demandeFacteur s
+      printState newS
+      menu newS
+    "6" -> do
+      (_,newS) <- chooseMidi s
+      printState newS
+      menu newS
     "7" -> do
-      stream <- getOutputDevice
-      close stream
+      putStrLn "\nAu revoir :D\n . \n . \n ."
     _ -> do
       putStrLn "Option invalide"
-      menu
+      menu s
 
 

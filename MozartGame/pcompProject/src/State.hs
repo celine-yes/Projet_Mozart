@@ -4,81 +4,97 @@ import Control.Monad.State
 import Sound.PortMidi 
 import Control.Concurrent
 import Sound.PortMidi
-import Midi
+
 
 data GameState = GameState{
     midiDeviceId :: Int,
-    outputDevice :: Maybe OutputDevice,
+    midiStream :: PMStream,
     instrumentId :: Int,
     transpositionId :: Int,
-    demitonsId :: Int,
     miroirId :: Int,
-    facteurId :: Double
+    facteurId :: Float
 }
 
---  crée une monade State avec l'état
--- de l'application stocké dans AppState, 
--- combiné avec la monade IO pour permettre 
--- l'exécution d'actions d'entrée/sortie.
-type Game = StateT GameState IO
 
 -- Fonctions pour modifier l'etat du jeu en vérifiant qu'il
 -- respecte bien les contraintes
 
-setMidiDeviceId :: Int -> Game ()
+setMidiDeviceId :: Int -> State GameState Int
 setMidiDeviceId n = do
-  deviceCount <- liftIO countDevices
-  if n >= 0 && n < deviceCount
-    then modify (\s -> s { midiDeviceId = n })
-    else return ()
+  id <- get
+  put $ id {midiDeviceId = n} 
+  return (n)
 
-setOutputDevice :: Maybe OutputDevice -> Game ()
-setOutputDevice n = modify (\s -> s { outputDevice = n })
+setMidiStream :: PMStream -> State GameState PMStream
+setMidiStream stream = do
+  s <- get
+  put $ s {midiStream = stream}
+  return (stream)
 
-setInstrumentId :: Int -> Game ()
-setInstrumentId n
-  | n >= 1 && n <= 5 = modify (\s -> s { instrumentId = n })
-  | otherwise = return ()
 
-setTranspositionId :: Int -> Game ()
-setTranspositionId n
-  | n >= 0 && n <= 2 = modify (\s -> s { transpositionId = n })
-  | otherwise = return ()
+setInstrumentId :: Int -> State GameState Int
+setInstrumentId n = do
+  if n >= 0 && n <= 128 then do
+    id <- get
+    put $ id {instrumentId = n} 
+    return (n)
+  else return (-1)
 
-setDemitonsId :: Int -> Game ()
-setDemitonsId n
-  | n >= 0 && n <= 2 = modify (\s -> s { demitonsId = n })
-  | otherwise = return ()
+setTranspositionId :: Int -> State GameState Int
+setTranspositionId n = do
+  if n >= 0 && n <= 2 then do
+    id <- get
+    put $ id {transpositionId = n} 
+    return (n)
+  else return (-1)
 
-setMiroirId :: Int -> Game ()
-setMiroirId n
-  | n >= 0 && n <= 1 = modify (\s -> s { miroirId = n })
-  | otherwise = return ()
 
-setFacteurId :: Double -> Game ()
-setFacteurId n
-  | n > 0.0 = modify (\s -> s { facteurId = n })
-  | otherwise = return ()
+setMiroirId :: Int -> State GameState Int
+setMiroirId n = do
+  if n >= 0 && n <= 1 then do
+    id <- get
+    put $ id {miroirId = n} 
+    return (n)
+  else return (-1)
+
+setFacteurId :: Float -> State GameState Float
+setFacteurId n = do
+  if n > 0.0 then do
+    id <- get
+    put $ id {facteurId = n} 
+    return (n)
+  else return (-1.0)
 
 -- Fonctions pour récupérer l'etat du jeu
 
-getMidiDeviceId :: Game Int
-getMidiDeviceId = gets midiDeviceId
+getMidiDeviceId :: State GameState Int
+getMidiDeviceId = do
+  id <- get
+  return (midiDeviceId id)
 
-getOutputDevice :: Game Maybe OutputDevice
-getOutputDevice = gets outputDevice
+getMidiStream :: State GameState PMStream
+getMidiStream = do
+  s <- get
+  return (midiStream s)
 
-getInstrumentId :: Game Int
-getInstrumentId = gets instrumentId
+getInstrumentId :: State GameState Int
+getInstrumentId = do
+  id <- get
+  return (instrumentId id)
 
-getTranspositionId :: Game Int
-getTranspositionId = gets transpositionId
+getTranspositionId :: State GameState Int
+getTranspositionId = do
+  id <- get 
+  return (transpositionId id)
 
-getDemitonsId :: Game Int
-getDemitonsId = gets demitonsId
+getMiroirId :: State GameState Int
+getMiroirId = do
+  id <- get 
+  return (miroirId id)
 
-getMiroirId :: Game Int
-getMiroirId = gets miroirId
+getFacteurId :: State GameState Float
+getFacteurId = do
+  id <- get 
+  return (facteurId id)
 
-getFacteurId :: Game Double
-getFacteurId = gets facteurId
+
